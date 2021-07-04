@@ -50,7 +50,14 @@ local BOOKTYPE_SPELL = BOOKTYPE_SPELL
 local function OnUpdate()
 	if starttime then
 		local spent = GetTime() - starttime
-		remainingtext:SetText(('%.1f'):format(duration - spent))
+		local remain = duration - spent
+		if (remain <= 0.5)
+			remainingtext:SetTextColor(0,1,0)
+		elseif (remain <= 2.0)
+			remainingtext:SetTextColor(1,0,0)
+		else
+			remainingtext:SetTextColor(1,1,1)
+		remainingtext:SetText(('%.1f'):format(remain))
 		local perc = spent / duration
 		if perc > 1 then
 			return swingbar:Hide()
